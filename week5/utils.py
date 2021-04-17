@@ -47,11 +47,19 @@ def load_embeddings(embeddings_path):
     #### YOUR CODE HERE ####
     ########################
 
+    embeddings, embeddings_dim = {}, 0
+    for line in open(embeddings_path):
+        line = line.strip().split()
+        vec = list(map(float, line[1:]))
+        embeddings[line[0]] = vec
+        embeddings_dim = len(vec)
+    return embeddings, embeddings_dim
+
     # remove this when you're done
-    raise NotImplementedError(
-        "Open utils.py and fill with your code. In case of Google Colab, download"
-        "(https://github.com/hse-aml/natural-language-processing/blob/master/project/utils.py), "
-        "edit locally and upload using '> arrow on the left edge' -> Files -> UPLOAD")
+    #raise NotImplementedError(
+    #    "Open utils.py and fill with your code. In case of Google Colab, download"
+    #    "(https://github.com/hse-aml/natural-language-processing/blob/master/project/utils.py), "
+    #    "edit locally and upload using '> arrow on the left edge' -> Files -> UPLOAD")
 
 
 def question_to_vec(question, embeddings, dim):
@@ -62,12 +70,16 @@ def question_to_vec(question, embeddings, dim):
     ########################
     #### YOUR CODE HERE ####
     ########################
+    arr = [embeddings[x] for x in question.split() if x in embeddings]
+    if not arr: return np.zeros(dim)
+    ans = np.mean(arr, axis=0)
+    return ans[:min(dim, len(ans))]
 
     # remove this when you're done
-    raise NotImplementedError(
-        "Open utils.py and fill with your code. In case of Google Colab, download"
-        "(https://github.com/hse-aml/natural-language-processing/blob/master/project/utils.py), "
-        "edit locally and upload using '> arrow on the left edge' -> Files -> UPLOAD")
+    #raise NotImplementedError(
+    #    "Open utils.py and fill with your code. In case of Google Colab, download"
+    #    "(https://github.com/hse-aml/natural-language-processing/blob/master/project/utils.py), "
+    #    "edit locally and upload using '> arrow on the left edge' -> Files -> UPLOAD")
 
 
 def unpickle_file(filename):

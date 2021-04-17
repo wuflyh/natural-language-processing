@@ -67,8 +67,8 @@ class DialogueManager(object):
         #    "edit locally and upload using '> arrow on the left edge' -> Files -> UPLOAD")
 
         self.chitchat_bot = ChatBot('week5')
-        trainer = ChatterBotCorpusTrainer(self.chitchat_bot)
-        trainer.train("chatterbot.corpus.english")
+        #trainer = ChatterBotCorpusTrainer(self.chitchat_bot)
+        #trainer.train("chatterbot.corpus.english")
        
     def generate_answer(self, question):
         """Combines stackoverflow and chitchat parts using intent recognition."""
